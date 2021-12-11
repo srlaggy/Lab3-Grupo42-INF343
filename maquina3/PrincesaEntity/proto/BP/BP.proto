@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "lab/princesa";
+
+package BP;
+
+message Reloj{
+    int64 Server1 = 1;
+    int64 Server2 = 2;
+	int64 Server3 = 3;
+}
+
+message RebeldesReq{
+    string planeta = 1;
+    string ciudad = 2;
+    Reloj reloj = 3;
+    int64 server = 4;
+}
+
+message RebeldesResp{
+    string planeta = 1;
+    string ciudad = 2;
+    Reloj reloj = 3;
+    int64 server = 4;
+    int64 cantRebeldes = 5;
+}
+
+service BrokerPrincesaService{
+    rpc RequestRebeldes(RebeldesReq) returns (RebeldesResp);
+}
