@@ -32,7 +32,7 @@ type Register struct {
 
 const (
 	protocolo_grpc = "tcp"
-	port_grpc = "60001"
+	port_grpc = "60002"
 )
 
 // ----------------- FUNCIONES ------------------ //
@@ -56,8 +56,8 @@ func GetRebels(planeta string, ciudad string) (int64, ut.Reloj){
 			for i := 0; i < len(sp.GetListRegister()); i++ {
 				if (sp.GetListRegister()[i].NamePlanet == planeta){
 					reloj_actual := sp.GetListRegister()[i].RelojPlanet     // MODIFICAR Server1 por el FULCRUM ACTUAL
-					valor, _ := strconv.ParseInt(s[1], 10, 64)            	// transformar a int64 la cantidad de rebeldes
-					return valor, reloj_actual                              // retorno la cantidad de rebeldes, reloj del planeta
+					valor, _ := strconv.ParseInt(s[1], 10, 64)            // transformar a int64 la cantidad de rebeldes
+					return valor, reloj_actual                                // retorno la cantidad de rebeldes, reloj del planeta
 				}
 			}
 		}

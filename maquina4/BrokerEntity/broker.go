@@ -11,5 +11,5 @@ import (
 // --------------- FUNCION MAIN --------------- //
 func main(){
 	// sr.Grpc_func()
-	rr.RequestRebels("Venus", "Santiago", *ut.CreateReloj(1,0,1), 1)
+	rr.RequestRebels("Venus", "Santiago", *ut.CreateReloj(1,0,1))
 }
