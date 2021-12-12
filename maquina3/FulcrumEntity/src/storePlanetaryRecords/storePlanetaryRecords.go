@@ -71,9 +71,9 @@ func AddCity(s []string) {
 	ut.FailOnError(error1, "Failed to open file")
 	var cityRegister string
 	if (len(s) == 3){
-		cityRegister =  s[1] + " " + s[2] + "\n"
+		cityRegister = s[0] + " " +  s[1] + " " + s[2] + "\n"
 	} else{
-		cityRegister =  s[1] + " " + "0" + "\n"
+		cityRegister = s[0] + " " + s[1] + " " + "0" + "\n"
 	}
 	_, error2 := file.WriteString(cityRegister)
 	ut.FailOnError(error2, "Failed to write file")
@@ -131,7 +131,7 @@ func UpdateName(s []string) {
 	// Agregar el dato de la ciudad
 	file, error1 := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	ut.FailOnError(error1, "Failed to open file")
-	_, error2 := file.WriteString(s[2] + " " + cantRebels + "\n")
+	_, error2 := file.WriteString(s[0] + " " + s[2] + " " + cantRebels + "\n")
 	ut.FailOnError(error2, "Failed to write file")
 	defer file.Close()
 	
@@ -184,7 +184,7 @@ func UpdateNumber(s []string) {
 	// Agregar el dato de la ciudad
 	file, error1 := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	ut.FailOnError(error1, "Failed to open file")
-	_, error2 := file.WriteString(s[1] + " " + s[2] + "\n")
+	_, error2 := file.WriteString(s[0] + " " + s[1] + " " + s[2] + "\n")
 	ut.FailOnError(error2, "Failed to write file")
 	defer file.Close()
 	

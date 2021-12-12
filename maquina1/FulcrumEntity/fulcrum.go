@@ -10,14 +10,11 @@ import(
     // "fmt"
     // "google.golang.org/grpc"
 	spr "lab/fulcrum/src/storePlanetaryRecords"
-	// rb "lab/fulcrum/src/requestRebelsFB"
-	"time"
+	rb "lab/fulcrum/src/requestRebelsFB"
+	// "time"
 )
 
 func main() {
-    // Conexión Grpc abierta para escuchar llamados del Broker
-    // rb.Grpc_func()
-
     // Pruebas
     spr.Commands("AddCity Mercurio Viña 10")
     spr.Commands("AddCity Venus Santiago 8")
@@ -28,7 +25,10 @@ func main() {
     spr.Commands("UpdateNumber Mercurio Valparaiso 5")
     spr.Commands("DeleteCity Venus Santiago")
 
-	time.Sleep(3*time.Second)
+    // Conexión Grpc abierta para escuchar llamados del Broker
+    rb.Grpc_func()
 
-    spr.CleanRecordsLog()
+	// time.Sleep(3*time.Second)
+
+    // spr.CleanRecordsLog()
 }

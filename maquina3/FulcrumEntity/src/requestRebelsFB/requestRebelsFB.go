@@ -51,12 +51,12 @@ func GetRebels(planeta string, ciudad string) (int64, ut.Reloj){
 	for scanner.Scan(){
 		registerCity := scanner.Text()
 		s := strings.Split(registerCity, " ")
-		if (s[0] == ciudad){
+		if (s[1] == ciudad){
 			// se iterará la lista de registros para obtener el reloj del planeta del presente servidor (1)
 			for i := 0; i < len(sp.GetListRegister()); i++ {
 				if (sp.GetListRegister()[i].NamePlanet == planeta){
 					reloj_actual := sp.GetListRegister()[i].RelojPlanet     // MODIFICAR Server1 por el FULCRUM ACTUAL
-					valor, _ := strconv.ParseInt(s[1], 10, 64)            // transformar a int64 la cantidad de rebeldes
+					valor, _ := strconv.ParseInt(s[2], 10, 64)            	// transformar a int64 la cantidad de rebeldes
 					return valor, reloj_actual                                // retorno la cantidad de rebeldes, reloj del planeta
 				}
 			}
