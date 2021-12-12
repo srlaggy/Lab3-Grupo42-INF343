@@ -4,9 +4,9 @@ import (
 	"context"
 	"log"
 	"net"
-	"fmt"
 	"google.golang.org/grpc"
 	bp "lab/broker/proto/BP"
+	rr "lab/broker/src/requestRebelsFB"
 	ut "lab/broker/utils"
 )
 
@@ -24,12 +24,8 @@ type server struct {
 }
 
 func (s *server) RequestRebeldes(ctx context.Context, in *bp.RebeldesReq) (*bp.RebeldesResp, error) {
-	test = "\nEl juego ya comenzó. No puedes ingresar.\n"
-	// if value!=0{
-	// 	mensajeDeEntrada = fmt.Sprintf("\nEstas dentro del juego. Eres el jugador %d\n", value)
-	// 	log.Printf("Entry Received")
-	// }
-	return &bp.RebeldesResp{GameMsg: mensajeDeEntrada, NroJugador: value}, nil
+	reloj, cantRebeldes, servidor := rr.RequestRebels(in.Planeta, in.Ciudad, *ut.CreateReloj(in.Reloj.Server1, in.Reloj.Server2, in.Reloj.Server3), int(in.Server))
+	return &bp.RebeldesResp{Planeta: in.Planeta, Ciudad: in.Ciudad, Reloj: &bp.Reloj{Server1: reloj.Server1, Server2: reloj.Server2, Server3: reloj.Server3}, Server: int64(servidor), CantRebeldes: cantRebeldes}, nil
 }
 
 // --------------- FUNCION PRINCIPAL --------------- //

@@ -14,10 +14,7 @@ import(
 )
 
 func main() {
-    spr.Comands("AddCity Mercurio Viña 10")
-    spr.Comands("AddCity Venus Santiago 8")
-    spr.Comands("AddCity Venus Rancagua")
-    spr.Comands("AddCity Mercurio Valparaiso 8")
-    spr.Comands("AddCity Mercurio Chiguayante")
+    spr.Comands("AddCity Mercurio Viña 2")
+    spr.Comands("AddCity Tierra Quellon 3")
     rb.Grpc_func()
 }

@@ -33,8 +33,14 @@ func GetNumberRebelds(planet string, city string, reloj ut.Reloj, server int, po
 	r, err := c.RequestRebeldes(ctx, &bp.RebeldesReq{Planeta: planet, Ciudad: city, Reloj: &bp.Reloj{Server1: reloj.Server1, Server2: reloj.Server2, Server3: reloj.Server3}, Server: int64(server)})
 	ut.FailOnError(err, "Failed to send a entry")
 
-	registros[posicion].RelojPlanet = *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3())
-	registros[posicion].Server = r.GetServer()
+	if (r.GetCantRebeldes() == -1){
+		fmt.Println("El planeta no existe")
+	} else if (r.GetCantRebeldes() == -2){
+		fmt.Println("La ciudad no existe")
+	} else {
+		registros[posicion].RelojPlanet = *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3())
+		registros[posicion].Server = r.GetServer()
+	}
 
 	fmt.Println("La cantidad de rebeldes es ", r.GetCantRebeldes())
 }

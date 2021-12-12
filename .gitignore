@@ -13,3 +13,8 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# no subir los txt
+/maquina1/FulcrumEntity/utils/RegistroPlanetario/*.txt
+/maquina2/FulcrumEntity/utils/RegistroPlanetario/*.txt
+/maquina3/FulcrumEntity/utils/RegistroPlanetario/*.txt
