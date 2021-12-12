@@ -17,6 +17,11 @@ type RegisterPrincesa struct{
 	Server int64
 }
 
+func CreateReloj(s1 int64, s2 int64, s3 int64) *Reloj{
+	r := Reloj{Server1: s1, Server2: s2, Server3: s3}
+	return &r
+}
+
 func CreateDir(protocolo string, address string, port string) string{
 	if protocolo == ""{
 		return address + ":" + port

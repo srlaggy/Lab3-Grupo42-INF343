@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "lab/broker";
+
+package requestRebelsFB;
+
+message Reloj{
+    int64 Server1 = 1;
+    int64 Server2 = 2;
+    int64 Server3 = 3;
+}
+
+message RebeldesReq{
+    string planeta = 1;
+    string ciudad = 2;
+}
+
+message RebeldesResp{
+    int64 cantRebeldes = 1;
+    Reloj reloj = 2;
+}
+
+service RequestRebelsService{
+    rpc RequestRebelsFB(RebeldesReq) returns (RebeldesResp);
+}
