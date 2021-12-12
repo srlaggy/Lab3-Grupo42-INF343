@@ -1,0 +1,8 @@
+AddCity Mercurio Viña 10
+AddCity Venus Santiago 8
+AddCity Venus Rancagua
+AddCity Mercurio Valparaiso 8
+AddCity Mercurio Chiguayante
+UpdateName Mercurio Chiguayante Coquimbo
+UpdateNumber Mercurio Valparaiso 5
+DeleteCity Venus Santiago

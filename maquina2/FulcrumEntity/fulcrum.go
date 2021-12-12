@@ -11,12 +11,10 @@ import(
     // "google.golang.org/grpc"
 	spr "lab/fulcrum/src/storePlanetaryRecords"
 	// rb "lab/fulcrum/src/requestRebelsFB"
+	"time"
 )
 
 func main() {
-    // Se crea el archivo de Log de registro
-    spr.CreateRecordsLog()
-
     // Conexión Grpc abierta para escuchar llamados del Broker
     // rb.Grpc_func()
 
@@ -29,4 +27,8 @@ func main() {
     spr.Commands("UpdateName Mercurio Chiguayante Coquimbo")
     spr.Commands("UpdateNumber Mercurio Valparaiso 5")
     spr.Commands("DeleteCity Venus Santiago")
+
+	time.Sleep(3*time.Second)
+
+    spr.CleanRecordsLog()
 }
