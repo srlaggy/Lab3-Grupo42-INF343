@@ -17,32 +17,26 @@ const (
 
 // variables globales
 var registros []ut.RegisterPrincesa
-var vivosSlice []bool
 
 // --------------- FUNCIONES GRPC --------------- //
-func GetNumberRebelds(entrada string) {
+func GetNumberRebelds(planet string, city string, reloj ut.Reloj, server int, posicion int) {
 	// Set up a connection to the server.
 	conn1, err := grpc.Dial(ut.CreateDir(protocolo_grpc, address, port_grpc), grpc.WithInsecure(), grpc.WithBlock())
 	ut.FailOnError(err, "Failed to create a connection")
 	defer conn1.Close()
 
-	c := lj.NewLiderJugadorServiceClient(conn1)
+	c := bp.NewBrokerPrincesaServiceClient(conn1)
 	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	nroJugadorBot = make([]int64, maxJug)
-	vivosSlice = make([]bool, maxJug)
-	for i:=0; i<maxJug; i++{
-		vivosSlice[i] = true
-	}
-
-	r, err := c.RequestGame(ctx, &lj.GameReq{EntryMsg: entrada})
+	r, err := c.RequestRebeldes(ctx, &bp.RebeldesReq{Planeta: planet, Ciudad: city, Reloj: &bp.Reloj{Server1: reloj.Server1, Server2: reloj.Server2, Server3: reloj.Server3}, Server: int64(server)})
 	ut.FailOnError(err, "Failed to send a entry")
-	// almacenamos numero del jugador
-	nroJugador = r.GetNroJugador()
-	nroJugadorBot[nroJugador-1] = nroJugador
-	fmt.Printf("%s", r.GetGameMsg())
+
+	registros[posicion].RelojPlanet = *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3())
+	registros[posicion].Server = r.GetServer()
+
+	fmt.Println("La cantidad de rebeldes es ", r.GetCantRebeldes())
 }
 
 // --------------- EXECUTE --------------- //
@@ -51,6 +45,7 @@ func Execute(){
 	var eleccion int64
 	var planeta string
 	var ciudad string
+	var pos int
 	var continuar bool = true
 	fmt.Println("\nBienvenida Princesa Leia")
 	fmt.Println("Sabemos que quieres estar informada de todo lo que acontece en los planetas vecinos")
@@ -72,6 +67,15 @@ func Execute(){
 			fmt.Print("Ingrese nombre de la ciudad: ")
 			fmt.Scanln(&ciudad)
 			time.Sleep(time.Second)
+
+			pos = ut.ContainsPlanet(registros, planeta, ciudad)
+			if (pos == -1){
+				pos = len(registros)
+				registros = append(registros, ut.RegisterPrincesa{NamePlanet: planeta, NameCity: ciudad, RelojPlanet: ut.Reloj{Server1: 0, Server2: 0, Server3: 0}, Server: 1})
+			}
+
+			GetNumberRebelds(planeta, ciudad, registros[pos].RelojPlanet, int(registros[pos].Server), pos)
+			time.Sleep(time.Second)
 		case 2:
 			time.Sleep(time.Second)
 			continuar = false
@@ -83,12 +87,10 @@ func Execute(){
 			time.Sleep(time.Second)
 		}
 	}
+
+	ut.PrintRegister(registros)
 }
 
-func GetRegistros() []RegisterPrincesa{
+func GetRegistros() []ut.RegisterPrincesa{
 	return registros
-}
-
-func GetVivosSlice() []bool{
-	return vivosSlice
 }

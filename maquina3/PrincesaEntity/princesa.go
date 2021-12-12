@@ -1,13 +1,10 @@
 package main
 
 import (
-	ut "lab/princesa/utils"
-	rr "lab/broker/src/requestRebeldesPB"
-	"google.golang.org/grpc"
-	"fmt"
+	rr "lab/princesa/src/requestRebeldesPB"
 )
 
 // --------------- FUNCION MAIN --------------- //
 func main(){
-	rr.Grpc_func()
+	rr.Execute()
 }
