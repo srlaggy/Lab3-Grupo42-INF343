@@ -14,15 +14,21 @@ import (
 )
 
 // Se tendrán las funciones:
-// AddCity
-// UpdateName
-// UpdateNumber
-// DeleteCity
+// (0) Commands
+// (1) AddCity			-> Se agrega la ciudad al registro de su planeta
+// (2) UpdateName		-> Se actualiza el nombre de la ciudad del registro de su planeta
+// (3) UpdateNumber		-> Se actualiza la cantidad de rebeldes de la ciudad del registro de su planeta
+// (4) DeleteCity		-> Se elimina la ciudad del registro de su planeta
+// (5) CreateRecordsLog	-> Se crea el archivo de Log de Registro
+// (6) RecordsLog		-> Se agrega el comando enviado por los informantes al Log de Registro
+// (7) GetListRegister	-> Se retorna la lista de registros de los planetas
 
 // var global
 var listRegister []ut.Register
 
-func Comands(str string) {
+// Commands: se verifica qué tipo de comando envió el informante y se registra tal comando
+func Commands(str string) {
+	RecordsLog(str)
 	s := strings.Split(str, " ")
 	if (s[0] == "AddCity"){
 		AddCity(s[1:])
@@ -48,7 +54,6 @@ func AddCity(s []string) {
 		ut.FailOnError(err, "Failed to create file")
 		defer file.Close()
 		listRegister = append(listRegister, ut.Register{NamePlanet: s[0], RelojPlanet: ut.Reloj{Server1: 0, Server2: 0, Server3: 0}})
-		// fmt.Println("lista: ", listRegister)
 	}
 
 	// Agregar el dato de la ciudad
@@ -226,6 +231,25 @@ func DeleteCity(s []string) {
 		}
 	}
 	fmt.Println("lista: ", listRegister)
+}
+
+// CreateRecordsLog: se crea el archivo de Log de registro
+func CreateRecordsLog() {
+	var fileName string = "utils/RecordsLog" + ".txt"
+	file, err := os.Create(fileName)
+	ut.FailOnError(err, "Failed to create file")
+	defer file.Close()
+}
+
+
+// RecordsLog: se agrega cada Command en el archivo de Log de Registro
+func RecordsLog(str string) {
+	var fileName string = "utils/RecordsLog" + ".txt"
+	file, error1 := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	ut.FailOnError(error1, "Failed to open file")
+	_, error2 := file.WriteString(str + "\n")
+	ut.FailOnError(error2, "Failed to write file")
+	defer file.Close()
 }
 
 

@@ -18,3 +18,8 @@
 /maquina1/FulcrumEntity/utils/RegistroPlanetario/*.txt
 /maquina2/FulcrumEntity/utils/RegistroPlanetario/*.txt
 /maquina3/FulcrumEntity/utils/RegistroPlanetario/*.txt
+
+# no subir el archivo RecordsLog.txt
+/maquina1/FulcrumEntity/utils/RecordsLog.txt
+/maquina2/FulcrumEntity/utils/RecordsLog.txt
+/maquina3/FulcrumEntity/utils/RecordsLog.txt
