@@ -46,6 +46,7 @@ func RequestRebels(planeta string, ciudad string, reloj ut.Reloj, servidor int) 
 	rand.Seed(time.Now().UnixNano())
 	var port_grpc string
 	var server int
+	var relojAux ut.Reloj
 	lista := rand.Perm(3)
 	for j := 0; j < 3; j++ {
 		if (lista[j] == 0){
@@ -71,17 +72,13 @@ func RequestRebels(planeta string, ciudad string, reloj ut.Reloj, servidor int) 
 		ut.FailOnError(err, "Failed to send Rebels")
 
 		if ((r.GetCantRebeldes() < 0) && (j != 2)){
+			relojAux = *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3())
 			continue
-		} else if (!VerificarReloj(reloj, *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3()), servidor)){
+		} else if ((!VerificarReloj(reloj, *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3()), servidor)) && (j != 2)){
 			continue
 		} else {
 			return *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3()), r.GetCantRebeldes(), server
-			// relojAux : reloj de la respuesta (Fulcrum)
-			// relojAux := *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3())
-			// flag = VerificarReloj(reloj, relojAux, server)
-			// impresión: Princesa, Fulcrum, flag, cantidad de rebeldes
-			// fmt.Println("server: ", server, " -> ", reloj, relojAux, flag, r.GetCantRebeldes())
 		}
 	}
-	return *ut.CreateReloj(0,0,0), 0, 1
+	return relojAux, 0, server
 }

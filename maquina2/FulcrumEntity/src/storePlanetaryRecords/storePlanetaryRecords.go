@@ -48,7 +48,7 @@ func AddCity(s []string) {
 		ut.FailOnError(err, "Failed to create file")
 		defer file.Close()
 		listRegister = append(listRegister, ut.Register{NamePlanet: s[0], RelojPlanet: ut.Reloj{Server1: 0, Server2: 0, Server3: 0}})
-		fmt.Println("lista: ", listRegister)
+		// fmt.Println("lista: ", listRegister)
 	}
 
 	// Agregar el dato de la ciudad
@@ -57,7 +57,7 @@ func AddCity(s []string) {
 	var cityRegister string
 	if (len(s) == 3){
 		cityRegister =  s[1] + " " + s[2] + "\n"
-	} else{
+	} else {
 		cityRegister =  s[1] + " " + "0" + "\n"
 	}
 	_, error2 := file.WriteString(cityRegister)
@@ -67,7 +67,7 @@ func AddCity(s []string) {
 	// Cambiar el número en reloj vectorial del planeta	
 	for i := 0; i < len(listRegister); i++ {
 		if (listRegister[i].NamePlanet == s[0]){
-			listRegister[i].RelojPlanet.Server1 = listRegister[i].RelojPlanet.Server2 + 1
+			listRegister[i].RelojPlanet.Server2 = listRegister[i].RelojPlanet.Server2 + 1
 		}
 	}
 	fmt.Println("lista: ", listRegister)
@@ -123,7 +123,7 @@ func UpdateName(s []string) {
 	// Cambiar el número en reloj vectorial del planeta	
 	for i := 0; i < len(listRegister); i++ {
 		if (listRegister[i].NamePlanet == s[0]){
-			listRegister[i].RelojPlanet.Server1 = listRegister[i].RelojPlanet.Server2 + 1
+			listRegister[i].RelojPlanet.Server2 = listRegister[i].RelojPlanet.Server2 + 1
 		}
 	}
 	fmt.Println("lista: ", listRegister)
@@ -176,7 +176,7 @@ func UpdateNumber(s []string) {
 	// Cambiar el número en reloj vectorial del planeta	
 	for i := 0; i < len(listRegister); i++ {
 		if (listRegister[i].NamePlanet == s[0]){
-			listRegister[i].RelojPlanet.Server1 = listRegister[i].RelojPlanet.Server2 + 1
+			listRegister[i].RelojPlanet.Server2 = listRegister[i].RelojPlanet.Server2 + 1
 		}
 	}
 	fmt.Println("lista: ", listRegister)
@@ -222,7 +222,7 @@ func DeleteCity(s []string) {
 	// Cambiar el número en reloj vectorial del planeta	
 	for i := 0; i < len(listRegister); i++ {
 		if (listRegister[i].NamePlanet == s[0]){
-			listRegister[i].RelojPlanet.Server1 = listRegister[i].RelojPlanet.Server2 + 1
+			listRegister[i].RelojPlanet.Server2 = listRegister[i].RelojPlanet.Server2 + 1
 		}
 	}
 	fmt.Println("lista: ", listRegister)

@@ -48,7 +48,7 @@ func AddCity(s []string) {
 		ut.FailOnError(err, "Failed to create file")
 		defer file.Close()
 		listRegister = append(listRegister, ut.Register{NamePlanet: s[0], RelojPlanet: ut.Reloj{Server1: 0, Server2: 0, Server3: 0}})
-		fmt.Println("lista: ", listRegister)
+		// fmt.Println("lista: ", listRegister)
 	}
 
 	// Agregar el dato de la ciudad

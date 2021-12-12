@@ -37,10 +37,10 @@ func GetNumberRebelds(planet string, city string, reloj ut.Reloj, server int, po
 		fmt.Println("El planeta no existe")
 	} else if (r.GetCantRebeldes() == -2){
 		fmt.Println("La ciudad no existe")
-	} else {
-		registros[posicion].RelojPlanet = *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3())
-		registros[posicion].Server = r.GetServer()
 	}
+
+	registros[posicion].RelojPlanet = *ut.CreateReloj(r.GetReloj().GetServer1(), r.GetReloj().GetServer2(), r.GetReloj().GetServer3())
+	registros[posicion].Server = r.GetServer()
 
 	fmt.Println("La cantidad de rebeldes es ", r.GetCantRebeldes())
 }
@@ -82,6 +82,7 @@ func Execute(){
 
 			GetNumberRebelds(planeta, ciudad, registros[pos].RelojPlanet, int(registros[pos].Server), pos)
 			time.Sleep(time.Second)
+			ut.PrintRegister(registros)
 		case 2:
 			time.Sleep(time.Second)
 			continuar = false
@@ -93,7 +94,6 @@ func Execute(){
 			time.Sleep(time.Second)
 		}
 	}
-
 	ut.PrintRegister(registros)
 }
 

@@ -62,7 +62,12 @@ func GetRebels(planeta string, ciudad string) (int64, ut.Reloj){
 			}
 		}
 	}
-	return -2, *ut.CreateReloj(0,0,0)	// -2 : no existe la ciudad
+	for i := 0; i < len(sp.GetListRegister()); i++ {
+		if (sp.GetListRegister()[i].NamePlanet == planeta){
+			return -2, sp.GetListRegister()[i].RelojPlanet	// -2 : no existe la ciudad
+		}
+	}
+	return -2, *ut.CreateReloj(0,0,0)
 }
 
 // --------------- FUNCIONES GRPC --------------- //
