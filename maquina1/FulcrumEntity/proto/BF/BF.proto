@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "lab/fulcrum";
+
+package BF;
+
+message Reloj{
+    int64 Server1 = 1;
+    int64 Server2 = 2;
+	int64 Server3 = 3;
+}
+
+message ServerReq{
+    string planeta = 1;
+}
+
+message ServerResp{
+    Reloj reloj = 1;
+    int64 existe = 2;
+}
+
+service BrokerFulcrumService{
+    rpc RequestServer(ServerReq) returns (ServerResp);
+}

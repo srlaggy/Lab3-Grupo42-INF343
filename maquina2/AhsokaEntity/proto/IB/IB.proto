@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "lab/ahsoka";
+
+package IB;
+
+message Reloj{
+    int64 Server1 = 1;
+    int64 Server2 = 2;
+	int64 Server3 = 3;
+}
+
+message ServerReq{
+    string planeta = 1;
+    string ciudad = 2;
+    Reloj reloj = 3;
+    int64 server = 4;
+}
+
+message ServerResp{
+    string direccion = 1;
+    string puerto = 2;
+    int64 caso = 3;
+    int64 serverNuevo = 4;
+}
+
+service InformanteBrokerService{
+    rpc RequestServer(ServerReq) returns (ServerResp);
+}

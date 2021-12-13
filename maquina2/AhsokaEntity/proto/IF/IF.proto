@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "lab/ahsoka";
+
+package IF;
+
+message Reloj{
+    int64 Server1 = 1;
+    int64 Server2 = 2;
+	int64 Server3 = 3;
+}
+
+message WriteReq{
+    string comando = 1;
+    string planeta = 2;
+    string ciudad = 3;
+    string valor = 4;
+    int64 caso = 5;
+}
+
+message WriteResp{
+    Reloj reloj = 1;
+    int64 estado = 2;
+}
+
+service InformanteFulcrumService{
+    rpc RequestWrite(WriteReq) returns (WriteResp);
+}
